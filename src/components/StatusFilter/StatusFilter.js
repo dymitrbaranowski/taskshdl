@@ -9,11 +9,11 @@ export const StatusFilter = () => {
 
   return (
     <div className={css.wrapper}>
-      <Button isActive={filter === statusFilters.all}>All</Button>
-      <Button isActive={filter === statusFilters.active}>Active</Button>
-      <Button isActive={filter === statusFilters.completed}>Completed</Button>
+      <Button selected={filter === statusFilters.all}>All</Button>
+      <Button selected={filter === statusFilters.active}>Active</Button>
+      <Button selected={filter === statusFilters.completed}>Completed</Button>
     </div>
   );
 };
 // The StatusFilter component provides buttons to filter tasks by their status.
-// It uses the Button component to render three buttons: "All", "Active", and "
+// It uses the Button component to render three buttons: "All", "Active", and "Completed".
