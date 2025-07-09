@@ -1,27 +1,34 @@
 import { useSelector } from 'react-redux';
 
 import { Task } from 'components/Task/Task';
+import { getTasks, getStatusFilter } from '../../redux/selectors';
+
 import { statusFilters } from 'redux/constants';
 // The TaskList component renders a list of tasks based on the current filter.
 import css from './TaskList.module.css';
 
-export const TaskList = () => {
-  const tasks = useSelector(state => state.tasks.items);
-  const filter = useSelector(state => state.filters.status);
+const getVisibleTasks = (tasks, statusFilter) => {
+  switch (statusFilter) {
+    case statusFilters.active:
+      return tasks.filter(task => !task.completed);
+    case statusFilters.completed:
+      return tasks.filter(task => task.completed);
+    default:
+      return tasks;
+  }
+};
 
-  const filteredTasks = tasks.filter(task => {
-    if (filter === statusFilters.active) {
-      return !task.completed;
-    }
-    if (filter === statusFilters.completed) {
-      return task.completed;
-    }
-    return true;
-  });
+export const TaskList = () => {
+  // Отримуємо масив завдань із стану Redux
+  const tasks = useSelector(getTasks);
+  // Отримуємо значення фільтра із стану Redux
+  const statusFilter = useSelector(getStatusFilter);
+  // Обчислюємо масив завдань, які необхідно відображати в інтерфейсі
+  const visibleTasks = getVisibleTasks(tasks, statusFilter);
 
   return (
     <ul className={css.list}>
-      {filteredTasks.map(task => (
+      {visibleTasks.map(task => (
         <li className={css.listItem} key={task.id}>
           <Task task={task} />
         </li>
@@ -29,4 +36,3 @@ export const TaskList = () => {
     </ul>
   );
 };
-export default TaskList;
