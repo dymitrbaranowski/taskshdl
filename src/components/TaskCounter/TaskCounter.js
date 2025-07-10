@@ -29,3 +29,5 @@ export const TaskCounter = () => {
 // The TaskCounter component displays the count of active and completed tasks.
 // It uses the useSelector hook to access the tasks from the Redux store and calculates the counts
 //
+// The component renders two paragraphs showing the number of active and completed tasks.
+// The styles are imported from a CSS module for styling the text.
