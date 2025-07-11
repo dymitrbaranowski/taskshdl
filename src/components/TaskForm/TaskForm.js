@@ -32,3 +32,6 @@ export const TaskForm = () => {
     </form>
   );
 };
+//
+// The TaskForm component allows users to add new tasks by submitting a form.
+// It uses the Redux dispatch function to send the addTask action with the task text.
